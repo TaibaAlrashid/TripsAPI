@@ -22,3 +22,4 @@ module.exports = (sequelize, DataTypes) => {
     SequelizeSlugify.slugifyModel(Trip, { source: ["title"] });
     return Trip;
 };
+

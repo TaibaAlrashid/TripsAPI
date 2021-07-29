@@ -8,7 +8,12 @@ module.exports = (sequelize, DataTypes) => {
         msg: "Username taken.",
       },
     },
-    password: { type: DataTypes.STRING, allowNull: false },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   });
+
+
   return User;
 };

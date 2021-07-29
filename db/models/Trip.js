@@ -1,4 +1,4 @@
-
+const SequelizeSlugify = require("sequelize-slugify");
 module.exports = (sequelize, DataTypes) => {
     const Trip = sequelize.define("Trip", {
 
@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         },
     });
 
-    // SequelizeSlugify.slugifyModel(Trip, { source: ["title"] });
+    SequelizeSlugify.slugifyModel(Trip, { source: ["title"] });
     return Trip;
 
 };

@@ -34,9 +34,7 @@ router.param("tripId", async (req, res, next, tripId) => {
 
 
 // ****************** CREATE TRIP ******************
-router.post("/", createTrip);
-
-// router.post("/", passport.authenticate("jwt", { session: false }), upload.single("image"), createTrip);
+router.post("/", passport.authenticate("jwt", { session: false }), upload.single("image"), createTrip);
 
 
 

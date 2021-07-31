@@ -43,4 +43,17 @@ Object.keys(db).forEach((modelName) => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+
+// ****************** MODEL RELATIONSHIP ******************
+
+// ****************** USER/TRIP RELATIONSHIP ******************
+db.User.hasOne(db.Trip, {
+  as: "trip",
+  foreignKey: "userId"
+});
+
+db.Trip.belongsTo(db.User, {
+  as: "user"
+});
+
 module.exports = db;

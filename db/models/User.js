@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: {
         args: true,
-        msg: "Username taken.",
+        msg: "Username is Taken.",
       },
     },
     password: {

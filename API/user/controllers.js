@@ -9,7 +9,7 @@ exports.signup = async (req, res, next) => {
 
   try {
     const hashedPassword = await bcrypt.hash(password, saltRounds);
-    console.log(hashedPassword);
+    console.log(hashedPassword); // remove console logs before pushing and merging
     req.body.password = hashedPassword;
     const newUser = await User.create(req.body);
     const payload = {
@@ -18,14 +18,12 @@ exports.signup = async (req, res, next) => {
       exp: Date.now() + JWT_EXPIRATION_MS,
     };
 
-
     const token = jwt.sign(JSON.stringify(payload), JWT_SECRET);
     res.json({ token });
   } catch (error) {
     next(error);
   }
-}
-
+};
 
 exports.signin = async (req, res, next) => {
   const { user } = req;
@@ -37,4 +35,3 @@ exports.signin = async (req, res, next) => {
   const token = jwt.sign(JSON.stringify(payload), "secretkey");
   res.json({ token });
 };
-

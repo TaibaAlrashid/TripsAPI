@@ -43,17 +43,17 @@ Object.keys(db).forEach((modelName) => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-
 // ****************** MODEL RELATIONSHIP ******************
 
 // ****************** USER/TRIP RELATIONSHIP ******************
+// A user has only one trip? Can't a user make multiple trips?
 db.User.hasOne(db.Trip, {
   as: "trip",
-  foreignKey: "userId"
+  foreignKey: "userId",
 });
 
 db.Trip.belongsTo(db.User, {
-  as: "user"
+  as: "user",
 });
 
 module.exports = db;

@@ -1,7 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const { tripsfetch, createTrip } = require("./controllers");
+
+// ****************** CONTROLLERS IMPORT ******************
+const { tripsfetch, createTrip, fetchTrips, deleteTrip } = require("./controllers");
+
+// ****************** MIDDLEWARE IMPORT ******************
 const passport = require("passport");
+
+// ****************** MULTER IMPORT ******************
 const multer = require("multer");
 
 
@@ -21,7 +27,7 @@ const upload = multer({ storage });
 
 // ****************** MIDDLEWARE PARAM ******************
 router.param("tripId", async (req, res, next, tripId) => {
-    const trip = await fetchBook(tripId, next);
+    const trip = await fetchTrips(tripId, next);
     if (trip) {
         req.trip = trip;
         next();
@@ -36,6 +42,6 @@ router.param("tripId", async (req, res, next, tripId) => {
 // ****************** CREATE TRIP ******************
 router.post("/", passport.authenticate("jwt", { session: false }), upload.single("image"), createTrip);
 
-
+router.delete("/:tripId", deleteTrip);
 
 module.exports = router;

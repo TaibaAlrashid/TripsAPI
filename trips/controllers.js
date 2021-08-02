@@ -4,7 +4,7 @@ const { Trip } = require("../db/models");
 exports.tripsfetch = async (req, res, next) => {
     try {
         const trips = await Trip.findAll({
-            attributes: { exclude: ["createdAt", "updatedAt"] },
+            attributes: { include: ["id", "title", "image", "description"] },
         });
         res.json(trips);
     } catch (error) {
@@ -12,8 +12,20 @@ exports.tripsfetch = async (req, res, next) => {
     }
 }
 
+// ****************** GET THE TRIP BY ID ******************
+exports.fetchTrips = async (tripId, next) => {
+    try {
+        const trip = await Trip.findByPk(tripId);
+        return trip;
+    } catch (error) {
+        next(error);
+    }
+};
+
+
 exports.createTrip = async (req, res, next) => {
     try {
+
         if (req.file) {
             req.body.image = `http://${req.get("host")}/${req.file.path}`;
         }
@@ -25,3 +37,12 @@ exports.createTrip = async (req, res, next) => {
     }
 
 }
+
+exports.deleteTrip = async (req, res, next) => {
+    try {
+        await req.trip.destroy();
+        res.status(204).end();
+    } catch (error) {
+        next(error);
+    }
+};

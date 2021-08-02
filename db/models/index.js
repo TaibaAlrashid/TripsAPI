@@ -56,4 +56,6 @@ db.Trip.belongsTo(db.User, {
   as: "user"
 });
 
+
+
 module.exports = db;

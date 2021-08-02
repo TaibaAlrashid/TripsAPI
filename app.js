@@ -4,15 +4,25 @@ const bodyParser = require("body-parser");
 const app = express();
 const db = require("./db/models");
 
+// ****************** MIDDLEWARE  IMPORT ******************
+const passport = require("passport");
+const { localStrategy } = require("./API/middleware/passport");
+const { jwtStrategy } = require("./API/middleware/passport");
+
+
 // ****************** ROUTES IMPORT ******************
 const userRoutes = require("./API/user/routes");
 const triproutes = require("./trips/routes");
 
 
 
-
+// Request ----> Middleware ------> Next() ------> Router/Controller
+//         <-------------------------------------- Response  
 app.use(cors());
 app.use(bodyParser.json());
+app.use(passport.initialize());
+passport.use(localStrategy);
+passport.use(jwtStrategy);
 
 // ****************** ROUTES ******************
 app.use("/trips", triproutes);

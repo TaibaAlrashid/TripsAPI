@@ -1,6 +1,6 @@
 {
   "development": {
-    "username": "engineermaha",
+    "username": "taibah",
     "password": null,
     "database": "trips_db",
     "host": "127.0.0.1",
@@ -23,5 +23,5 @@
   },
   "scripts": {
     "start": "nodemon app.js"
-  } 
+  }
 }

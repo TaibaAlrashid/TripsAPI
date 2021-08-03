@@ -11,7 +11,8 @@ const { jwtStrategy } = require("./API/middleware/passport");
 
 // ****************** ROUTES IMPORT ******************
 const userRoutes = require("./API/user/routes");
-const triproutes = require("./trips/routes");
+const triproutes = require("./API/trips/routes");
+const profileRoutes = require("./API/profile/routes");
 
 // Request ----> Middleware ------> Next() ------> Router/Controller
 //         <-------------------------------------- Response
@@ -24,6 +25,7 @@ passport.use(jwtStrategy);
 // ****************** ROUTES ******************
 app.use("/trips", triproutes);
 app.use(userRoutes);
+app.use("/profiles", profileRoutes);
 app.use("/media", express.static("media"));
 
 // ****************** Handling Errors ******************
